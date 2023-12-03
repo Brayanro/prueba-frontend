@@ -3,14 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { AppContext, AppContextType } from "../context/AppContext";
 
 export const LogoutButton = () => {
-  const { setUser } = useContext(AppContext) as AppContextType;
+  const { setUser, setFavoritesMovies } = useContext(
+    AppContext
+  ) as AppContextType;
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
     setUser({ email: "" });
+    setFavoritesMovies([]);
     localStorage.removeItem("token");
     localStorage.removeItem("saveUser");
+    localStorage.removeItem("favoritesMovies");
     navigate("/login");
   };
 

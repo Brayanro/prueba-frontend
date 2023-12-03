@@ -5,7 +5,6 @@ import { App } from "./App";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AppContextProvider } from "./context/AppContext";
 import "./index.css";
-import { Favorites } from "./pages/Favorites";
 import { Login } from "./pages/Login";
 
 const router = createBrowserRouter([
@@ -20,14 +19,6 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-  },
-  {
-    path: "/favorites",
-    element: (
-      <ProtectedRoute>
-        <Favorites />
-      </ProtectedRoute>
-    ),
   },
 ]);
 

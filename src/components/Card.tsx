@@ -1,5 +1,3 @@
-import { Toaster } from "sonner";
-
 interface CardProps {
   backdrop: string;
   title: string;
@@ -45,7 +43,6 @@ export const Card: React.FC<CardProps> = ({
           </svg>
         </button>
       </div>
-      <Toaster />
     </article>
   );
 };

@@ -1,46 +1,25 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext, AppContextType } from "../context/AppContext";
-import useCategories from "../hooks/useCategories";
 import { Card } from "./Card";
 import { SearchInput } from "./SearchInput";
 
-interface CategoriesProps {
-  categoryName: string;
-  fetchUrl: string;
-}
-
-export const Categories: React.FC<CategoriesProps> = ({
-  fetchUrl,
-  categoryName,
-}) => {
-  const { movies, loading, searchTerm, setSearchTerm } =
-    useCategories(fetchUrl);
+export const Favorites = () => {
   const { favoritesMovies, handleSaveMovieFavorite } = useContext(
     AppContext
   ) as AppContextType;
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredMovies = movies.filter(({ title }) => {
+  const filteredMovies = favoritesMovies.filter(({ title }) => {
     return title.toLowerCase().includes(searchTerm.toLowerCase());
   });
-
-  const skeletonElements = new Array(20).fill(null);
 
   return (
     <section className="mx-6 md:mx-16 pb-14 mt-[520px] lg:mt-[480px] 2xl:h-screen">
       <h2 className="text-white text-2xl font-bold">
-        {categoryName} ({movies.length})
+        Favorites ({favoritesMovies.length})
       </h2>
       <SearchInput searchTerm={searchTerm} handleSearch={setSearchTerm} />
-      {loading ? (
-        <div className="grid gap-6 mt-6 place-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-          {skeletonElements.map((_, index) => (
-            <article
-              key={index}
-              className="w-[280px] h-[158px] rounded-2xl animate-pulse bg-gray-200"
-            />
-          ))}
-        </div>
-      ) : filteredMovies.length > 0 ? (
+      {filteredMovies.length > 0 ? (
         <div className="grid gap-6 mt-6 place-items-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {filteredMovies.map((movie) => (
             <Card

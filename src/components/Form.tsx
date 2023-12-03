@@ -11,7 +11,7 @@ export const Form = () => {
     passwordError,
     handleLogin,
     hanldeTogglePasswordVisibility,
-    isPasswordHidden,
+    passwordHidden,
   } = useForm();
 
   return (
@@ -43,7 +43,7 @@ export const Form = () => {
                 className="text-gray-400 absolute right-3 top-4 inset-y-0 my-auto active:text-gray-600 cursor-pointer"
                 onClick={hanldeTogglePasswordVisibility}
               >
-                {isPasswordHidden ? (
+                {passwordHidden ? (
                   <svg
                     className="w-7 h-7"
                     xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ export const Form = () => {
                 )}
               </div>
               <input
-                type={isPasswordHidden ? "password" : "text"}
+                type={passwordHidden ? "password" : "text"}
                 className="w-full h-16 rounded-lg bg-white p-4 text-base outline-none"
                 placeholder="********"
                 value={password}

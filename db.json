@@ -2,23 +2,8 @@
   "users": [
     {
       "email": "brayan@gmail.com",
-      "password": "dsjdjsdsd",
+      "password": "dsdsdsdsd",
       "id": 1
-    },
-    {
-      "email": "roberta@gmail.com",
-      "password": "dsdjsdjsd",
-      "id": 2
-    },
-    {
-      "email": "pepe@gmail.com",
-      "password": "pepeprpdfd",
-      "id": 3
-    },
-    {
-      "email": "roberta12@gmail.com",
-      "password": "dskdksdksd",
-      "id": 4
     }
   ]
 }

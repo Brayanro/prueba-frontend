@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Categories } from "./components/Categories";
+import { Favorites } from "./components/Favorites";
 import { Navbar } from "./components/Navbar";
 import { AppContext, AppContextType } from "./context/AppContext";
 import { movieService } from "./services/moviesService";
@@ -67,6 +68,7 @@ export const App = () => {
           fetchUrl={requests.requestUpcoming}
         />
       )}
+      {selectedTab === "Favorites" && <Favorites />}
     </main>
   );
 };

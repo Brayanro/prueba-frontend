@@ -4,9 +4,10 @@ export const isEmailValid = (email: string): boolean => {
 };
 
 export const generateRandomToken = (): string => {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const tokenLength = 30;
-  let token = '';
+  let token = "";
 
   for (let i = 0; i < tokenLength; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
@@ -14,7 +15,7 @@ export const generateRandomToken = (): string => {
   }
 
   return token;
-}
+};
 
 export const truncateString = (str: string, num: number): string => {
   if (str?.length > num) {
@@ -25,6 +26,10 @@ export const truncateString = (str: string, num: number): string => {
 };
 
 export const formatDateToUS = (isoDate: Date): string => {
-  const formattedDate = new Date(isoDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const formattedDate = new Date(isoDate).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
   return formattedDate;
 };

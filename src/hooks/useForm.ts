@@ -4,26 +4,45 @@ import { AppContext, AppContextType } from "../context/AppContext";
 import { loginUser } from "../services/loginService";
 import { generateRandomToken, isEmailValid } from "../utils/functions";
 
-const useForm = () => {
+interface UseFormResult {
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  password: string;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+  emailError: string;
+  setEmailError: React.Dispatch<React.SetStateAction<string>>;
+  passwordError: string;
+  setPasswordError: React.Dispatch<React.SetStateAction<string>>;
+  passwordHidden: boolean;
+  setPasswordHidden: React.Dispatch<React.SetStateAction<boolean>>;
+  handleLogin: (e: ChangeEvent<HTMLFormElement>) => Promise<void>;
+  handleChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleChangePassword: (e: ChangeEvent<HTMLInputElement>) => void;
+  hanldeTogglePasswordVisibility: () => void;
+}
+
+const useForm = (): UseFormResult => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [isPasswordHidden, setPasswordHidden] = useState(true);
+  const [passwordHidden, setPasswordHidden] = useState(true);
 
   const { setUser } = useContext(AppContext) as AppContextType;
 
   const navigate = useNavigate();
 
-  const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value);
   };
 
-  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = async (e: ChangeEvent<HTMLFormElement>) => {
+  const handleLogin = async (
+    e: ChangeEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     if (!isEmailValid(email)) {
       setEmailError("Please enter a valid email address.");
@@ -51,8 +70,8 @@ const useForm = () => {
     }
   };
 
-  const hanldeTogglePasswordVisibility = () => {
-    setPasswordHidden(!isPasswordHidden);
+  const hanldeTogglePasswordVisibility = (): void => {
+    setPasswordHidden(!passwordHidden);
   };
 
   return {
@@ -64,7 +83,12 @@ const useForm = () => {
     hanldeTogglePasswordVisibility,
     email,
     password,
-    isPasswordHidden,
+    passwordHidden,
+    setEmail,
+    setEmailError,
+    setPassword,
+    setPasswordError,
+    setPasswordHidden,
   };
 };
 
