@@ -1,25 +1,34 @@
 interface CardProps {
-  backdrop: string;
+  poster: string | null;
   title: string;
   isFavorite: boolean;
   handleSaveMovieFavorite: () => void;
+  handleSeeMoreDetails: () => void;
 }
 
 export const Card: React.FC<CardProps> = ({
-  backdrop,
+  poster,
   title,
   isFavorite,
   handleSaveMovieFavorite,
+  handleSeeMoreDetails,
 }) => {
   return (
-    <article className="w-[280px] h-auto rounded-2xl relative cursor-pointer">
-      <img
-        className="w-full h-auto rounded-2xl object-contain"
-        src={backdrop}
-        alt={title}
-      />
-      <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white rounded-2xl">
-        <p className="whitespace-normal text-xs md:text-sm font-bold flex justify-center items-center h-full text-center">
+    <article className="w-[271px] h-auto rounded-2xl relative cursor-pointer">
+      {poster ? (
+        <img
+          className="w-full h-auto rounded-2xl object-contain"
+          src={poster}
+          alt={title}
+          onClick={handleSeeMoreDetails}
+        />
+      ) : (
+        <div className="w-[271px] h-[406px] bg-gray-500 rounded-2xl flex items-center justify-center">
+          <p className="text-white text-sm font-medium">Image Not found</p>
+        </div>
+      )}
+      <div>
+        <p className="text-base font-bold absolute text-white bottom-7 mx-4">
           {title}
         </p>
         <button

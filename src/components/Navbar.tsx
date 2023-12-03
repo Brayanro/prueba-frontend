@@ -1,11 +1,18 @@
 import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AppContext, AppContextType } from "../context/AppContext";
 import { LogoutButton } from "./LogoutButton";
 
-export const Navbar = () => {
+interface NavbarProps {
+  isHome: boolean;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ isHome }) => {
   const [showLogoutButton, setShowLogoutButton] = useState(false);
   const { user, handleSelectedTab, selectedTab, setShowSidebar, showSidebar } =
     useContext(AppContext) as AppContextType;
+
+  const navigate = useNavigate();
 
   const handleToggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -108,45 +115,60 @@ export const Navbar = () => {
           </button>
         </div>
         <div className="lg:hidden mt-8 text-white">
-          <h4 className="text-lg font-bold">Filters section</h4>
+          <Link to="/" className="text-3xl text-[#31A5E0] font-bold">
+            Movies App
+          </Link>
+          <h4 className="text-lg font-bold mt-4">Filters section</h4>
           <ul className="flex flex-col gap-4 mt-6">
             <li
               className={`cursor-pointer ${
-                selectedTab === "Popular"
+                selectedTab === "Popular" && isHome
                   ? "text-[#5bb0ca]"
                   : "hover:text-[#5bb0ca]"
               }`}
-              onClick={() => handleSelectedTab("Popular")}
+              onClick={() => {
+                navigate("/");
+                handleSelectedTab("Popular");
+              }}
             >
               Popular movies
             </li>
             <li
               className={`cursor-pointer ${
-                selectedTab === "Top"
+                selectedTab === "Top" && isHome
                   ? "text-[#5bb0ca]"
                   : "hover:text-[#5bb0ca]"
               }`}
-              onClick={() => handleSelectedTab("Top")}
+              onClick={() => {
+                navigate("/");
+                handleSelectedTab("Top");
+              }}
             >
               Top rated
             </li>
             <li
               className={`cursor-pointer ${
-                selectedTab === "Upcoming"
+                selectedTab === "Upcoming" && isHome
                   ? "text-[#5bb0ca]"
                   : "hover:text-[#5bb0ca]"
               }`}
-              onClick={() => handleSelectedTab("Upcoming")}
+              onClick={() => {
+                navigate("/");
+                handleSelectedTab("Upcoming");
+              }}
             >
               Upcoming
             </li>
             <li
               className={`cursor-pointer ${
-                selectedTab === "Favorites"
+                selectedTab === "Favorites" && isHome
                   ? "text-[#5bb0ca]"
                   : "hover:text-[#5bb0ca]"
               }`}
-              onClick={() => handleSelectedTab("Favorites")}
+              onClick={() => {
+                navigate("/");
+                handleSelectedTab("Favorites");
+              }}
             >
               Favorites
             </li>
@@ -156,45 +178,62 @@ export const Navbar = () => {
         </div>
       </div>
       <div className="hidden lg:flex lg:items-center lg:justify-between lg:mx-10 text-white">
-        <h1 className="text-3xl text-[#31A5E0] font-bold text-center mb-8">
+        <Link
+          to="/"
+          className="text-3xl text-[#31A5E0] font-bold text-center mb-8"
+        >
           Movies App
-        </h1>
+        </Link>
         <ul className="flex flex-row gap-8 text-xl font-bold">
           <li
             className={`${
-              selectedTab === "Popular"
+              selectedTab === "Popular" && isHome
                 ? "bg-gray-300/30"
                 : "hover:bg-gray-300/30"
             } rounded-xl py-3 px-5 transition cursor-pointer`}
-            onClick={() => handleSelectedTab("Popular")}
+            onClick={() => {
+              navigate("/");
+              handleSelectedTab("Popular");
+            }}
           >
             Popular
           </li>
           <li
             className={`${
-              selectedTab === "Top" ? "bg-gray-300/30" : "hover:bg-gray-300/30"
+              selectedTab === "Top" && isHome
+                ? "bg-gray-300/30"
+                : "hover:bg-gray-300/30"
             } rounded-xl py-3 px-5 transition cursor-pointer`}
-            onClick={() => handleSelectedTab("Top")}
+            onClick={() => {
+              navigate("/");
+              handleSelectedTab("Top");
+            }}
           >
             Top rated
           </li>
           <li
             className={`${
-              selectedTab === "Upcoming"
+              selectedTab === "Upcoming" && isHome
                 ? "bg-gray-300/30"
                 : "hover:bg-gray-300/30"
             } rounded-xl py-3 px-5 transition cursor-pointer`}
-            onClick={() => handleSelectedTab("Upcoming")}
+            onClick={() => {
+              navigate("/");
+              handleSelectedTab("Upcoming");
+            }}
           >
             Upcoming
           </li>
           <li
             className={`${
-              selectedTab === "Favorites"
+              selectedTab === "Favorites" && isHome
                 ? "bg-gray-300/30"
                 : "hover:bg-gray-300/30"
             } rounded-xl py-3 px-5 transition cursor-pointer`}
-            onClick={() => handleSelectedTab("Favorites")}
+            onClick={() => {
+              navigate("/");
+              handleSelectedTab("Favorites");
+            }}
           >
             Favorites
           </li>

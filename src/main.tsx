@@ -6,6 +6,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AppContextProvider } from "./context/AppContext";
 import "./index.css";
 import { Login } from "./pages/Login";
+import { MovieDetailsPage } from "./pages/MovieDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <App />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/movie/:id",
+    element: (
+      <ProtectedRoute>
+        <MovieDetailsPage />
       </ProtectedRoute>
     ),
   },

@@ -33,7 +33,7 @@ export interface Genre {
 
 export interface ProductionCompany {
   id:             number;
-  logo_path:      string;
+  logo_path:      string | null;
   name:           string;
   origin_country: string;
 }
@@ -58,7 +58,7 @@ export interface Movies {
   original_title:    string;
   overview:          string;
   popularity:        number;
-  poster_path:       string;
+  poster_path:       null | string;
   release_date:      Date;
   title:             string;
   video:             boolean;
