@@ -13,8 +13,10 @@ interface User {
 export type AppContextType = {
   user: User;
   setUser: React.Dispatch<SetStateAction<User>>;
-  isAuthenticated: boolean;
-  setIsAuthenticated: React.Dispatch<SetStateAction<boolean>>;
+  selectedTab: string;
+  handleSelectedTab: (tab: string) => void;
+  showSidebar: boolean;
+  setShowSidebar: React.Dispatch<SetStateAction<boolean>>;
 };
 
 export const AppContext = createContext<AppContextType | null>(null);
@@ -27,26 +29,32 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
   children,
 }) => {
   const [user, setUser] = useState<User>({ email: "" });
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [selectedTab, setSelectedTab] = useState("Popular");
+  const [showSidebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
     const storedUser = localStorage.getItem("saveUser");
-
-    if (storedToken) {
-      setIsAuthenticated(true);
-    }
 
     if (storedUser) {
       setUser({ email: storedUser });
     }
   }, []);
 
-  console.log(user);
+  const handleSelectedTab = (tab: string): void => {
+    setSelectedTab(tab);
+    setShowSidebar(false);
+  };
 
   return (
     <AppContext.Provider
-      value={{ user, setUser, setIsAuthenticated, isAuthenticated }}
+      value={{
+        user,
+        setUser,
+        selectedTab,
+        handleSelectedTab,
+        showSidebar,
+        setShowSidebar,
+      }}
     >
       {children}
     </AppContext.Provider>

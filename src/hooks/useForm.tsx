@@ -11,9 +11,7 @@ const useForm = () => {
   const [passwordError, setPasswordError] = useState("");
   const [isPasswordHidden, setPasswordHidden] = useState(true);
 
-  const { setUser, setIsAuthenticated } = useContext(
-    AppContext
-  ) as AppContextType;
+  const { setUser } = useContext(AppContext) as AppContextType;
 
   const navigate = useNavigate();
 
@@ -44,7 +42,6 @@ const useForm = () => {
       const { data } = await loginUser(email, password);
 
       setUser({ email: data?.email || "" });
-      setIsAuthenticated(true);
       navigate("/");
       const token = generateRandomToken();
       localStorage.setItem("token", token);

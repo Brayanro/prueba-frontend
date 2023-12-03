@@ -1,15 +1,14 @@
-import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { AppContext, AppContextType } from "../context/AppContext";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { isAuthenticated } = useContext(AppContext) as AppContextType;
+  const storedToken = localStorage.getItem("token");
+  const storedUser = localStorage.getItem("saveUser");
 
-  if (!isAuthenticated) {
+  if (storedToken === null && storedUser === null) {
     return <Navigate to="/login" />;
   }
 

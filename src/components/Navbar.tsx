@@ -3,9 +3,9 @@ import { AppContext, AppContextType } from "../context/AppContext";
 import { LogoutButton } from "./LogoutButton";
 
 export const Navbar = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
   const [showLogoutButton, setShowLogoutButton] = useState(false);
-  const { user } = useContext(AppContext) as AppContextType;
+  const { user, handleSelectedTab, selectedTab, setShowSidebar, showSidebar } =
+    useContext(AppContext) as AppContextType;
 
   const handleToggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -16,7 +16,7 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="p-5">
+    <nav className="p-5 relative">
       <button
         className={`lg:hidden text-white focus:outline-none ${
           showSidebar ? "hidden" : "block"
@@ -30,7 +30,7 @@ export const Navbar = () => {
           viewBox="0 0 36 36"
           fill="none"
         >
-          <g clip-path="url(#clip0_3_264)">
+          <g clipPath="url(#clip0_3_264)">
             <path
               d="M4.5 27H31.5V24H4.5V27ZM4.5 19.5H31.5V16.5H4.5V19.5ZM4.5 9V12H31.5V9H4.5Z"
               fill="white"
@@ -45,7 +45,7 @@ export const Navbar = () => {
       </button>
       <div
         className={`lg:hidden fixed top-0 left-0 w-full h-full p-9 transition-transform transform ${
-          showSidebar ? "translate-x-0" : "-translate-x-full"
+          showSidebar ? "translate-x-0 z-10" : "-translate-x-full"
         }`}
         style={{ backgroundColor: "rgba(9, 20, 41, 0.80)" }}
       >
@@ -110,10 +110,46 @@ export const Navbar = () => {
         <div className="lg:hidden mt-8 text-white">
           <h4 className="text-lg font-bold">Filters section</h4>
           <ul className="flex flex-col gap-4 mt-6">
-            <li className="cursor-pointer">Popular movies</li>
-            <li className="cursor-pointer">Top rated</li>
-            <li className="cursor-pointer">Upcoming</li>
-            <li className="cursor-pointer">Favorites</li>
+            <li
+              className={`cursor-pointer ${
+                selectedTab === "Popular"
+                  ? "text-[#5bb0ca]"
+                  : "hover:text-[#5bb0ca]"
+              }`}
+              onClick={() => handleSelectedTab("Popular")}
+            >
+              Popular movies
+            </li>
+            <li
+              className={`cursor-pointer ${
+                selectedTab === "Top"
+                  ? "text-[#5bb0ca]"
+                  : "hover:text-[#5bb0ca]"
+              }`}
+              onClick={() => handleSelectedTab("Top")}
+            >
+              Top rated
+            </li>
+            <li
+              className={`cursor-pointer ${
+                selectedTab === "Upcoming"
+                  ? "text-[#5bb0ca]"
+                  : "hover:text-[#5bb0ca]"
+              }`}
+              onClick={() => handleSelectedTab("Upcoming")}
+            >
+              Upcoming
+            </li>
+            <li
+              className={`cursor-pointer ${
+                selectedTab === "Favorites"
+                  ? "text-[#5bb0ca]"
+                  : "hover:text-[#5bb0ca]"
+              }`}
+              onClick={() => handleSelectedTab("Favorites")}
+            >
+              Favorites
+            </li>
           </ul>
           <h4 className="text-lg font-bold mt-12">Account</h4>
           <LogoutButton />
@@ -124,16 +160,42 @@ export const Navbar = () => {
           Movies App
         </h1>
         <ul className="flex flex-row gap-8 text-xl font-bold">
-          <li className="hover:bg-gray-300/30 rounded-xl py-3 px-5 transition cursor-pointer">
+          <li
+            className={`${
+              selectedTab === "Popular"
+                ? "bg-gray-300/30"
+                : "hover:bg-gray-300/30"
+            } rounded-xl py-3 px-5 transition cursor-pointer`}
+            onClick={() => handleSelectedTab("Popular")}
+          >
             Popular
           </li>
-          <li className="hover:bg-gray-300/30 rounded-xl py-3 px-5 transition cursor-pointer">
+          <li
+            className={`${
+              selectedTab === "Top" ? "bg-gray-300/30" : "hover:bg-gray-300/30"
+            } rounded-xl py-3 px-5 transition cursor-pointer`}
+            onClick={() => handleSelectedTab("Top")}
+          >
             Top rated
           </li>
-          <li className="hover:bg-gray-300/30 rounded-xl py-3 px-5 transition cursor-pointer">
+          <li
+            className={`${
+              selectedTab === "Upcoming"
+                ? "bg-gray-300/30"
+                : "hover:bg-gray-300/30"
+            } rounded-xl py-3 px-5 transition cursor-pointer`}
+            onClick={() => handleSelectedTab("Upcoming")}
+          >
             Upcoming
           </li>
-          <li className="hover:bg-gray-300/30 rounded-xl py-3 px-5 transition cursor-pointer">
+          <li
+            className={`${
+              selectedTab === "Favorites"
+                ? "bg-gray-300/30"
+                : "hover:bg-gray-300/30"
+            } rounded-xl py-3 px-5 transition cursor-pointer`}
+            onClick={() => handleSelectedTab("Favorites")}
+          >
             Favorites
           </li>
         </ul>
